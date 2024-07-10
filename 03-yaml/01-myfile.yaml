@@ -1,0 +1,40 @@
+---
+
+# I am comment
+
+course_name: "NodeJS"
+version: 1.5
+price: &price 2000
+is_public: true
+release_date: 2021-04-05 12:23:22
+pre_enroll: null
+tags:
+  -python
+  - web developer
+  - mysql
+course_ta: ["praveen", "rakesh"]
+ta_details:
+  - name: "praveen"
+    email: "praveen@gmail.com"
+    role: "content admin"
+  - name: "rakesh"
+    email: "rakesh@gmail.com"
+    role: "discussion admin"
+  - {name: "rakesh", email: "rak@lco.dev", role: "devops"}
+short_desc: >
+  here is a short
+  description for nodejs course
+long_desc: |
+  now we can store
+  all indentation
+  and related things
+process_payment: *price
+
+  adv: &adv
+    mykey: myval
+
+another_adv:
+  one: two
+  <<: *adv
+
+...

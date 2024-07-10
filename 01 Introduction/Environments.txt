@@ -1,0 +1,6 @@
+Environment is a platform which is used for run our application.
+1) Dev Env => For developers integration testing
+2) SIT Env => For testers integration testing
+3) UAT Env => For client acceptance testing
+4) Pilot Env => Pre-Production Environment
+5) Prod Env => Live Environment
