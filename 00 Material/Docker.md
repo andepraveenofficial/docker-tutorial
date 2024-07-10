@@ -7,13 +7,13 @@
 
 - Introduction
 - Setup
-- Containerization
-- Create Docker Process
-- Basics
+- Docker Build Process
 - Docker Commands
+- yaml
 - Docker Compose
+- Run Docker Application
 
-- </details>
+</details>
 
 ---
 
@@ -24,24 +24,43 @@
 
 ![Docker](./Assets/01-introduction/01-docker.jpg)
 
-- Docker is a containerization software.
-- containerization means the process of executing application inside the container is called containerization.
-- using Docker we will run our application as a container.
-- Docker is used to simplify our application deployment process.
-- - Containers are lightweight, isolated environments that package applications and their dependencies.
-- Docker will take care of required dependencies of our application like (install java application dependencies, python application dependencies, nodejs application dependencies).
-
-- with Docker we can execute our application in any machine.
 - Docker is an open-source platform for developing, shipping, and running applications in containers.
+  - developing -> writing Dockerfile & build Docker image
+  - shipping -> store Docker Image that can use others
+  - Running -> Run the Docker Image in container
 
-- To avoid Environmental issues, so we are going for Docker.
-- Docker will download that application dependencies to execute our code.
-
-- we no need to bather about OS (windows / linux / mac), it run same way on every environment.
+* Docker is used to simplify our application deployment process.
+* Docker is a containerization software.
+* containerization means the process of executing application inside the container is called containerization.
+* Containers are lightweight, isolated environments that package applications and their dependencies.
+* Docker will take care of required dependencies installation of our application like (install java application dependencies, install python application dependencies, nodejs application dependencies),
+  you no need to install application dependencies.
+* Docker will download that application dependencies to execute our code.
+* To avoid Environmental issues, so we are going for Docker.
+* With Docker we can execute our application in any machine,
+  we no need to bather about OS (windows / linux / mac), it run same way on every environment.
 
 ### Virtualization
 
 - Running one operating system inside another operating system is called Virtualization.
+
+### Containerization
+
+- Packaging application code and dependencies into a single unit is called a container.
+- Executing application as a container is called containerization.
+- Container is an Virtual machine (linux VM) -> this is separate machine
+- Every container is a separate Linux System.
+- Every container contains source code, libraries and dependencies.
+- ![Containerization](./Assets/01-introduction/02-containerization.jpg)
+
+### Why Docker
+
+- Application Architecture
+  ![Application Architecture](./Assets/01-introduction/03-application-architecture.png)
+- Docker Architecture
+  ![Docker Architecture](./Assets/01-introduction/04-docker-architecture.png)
+- Application Environment
+- ![Application Environment](./Assets/01-introduction/05-application-environment.png)
 
 ### Documentation
 
@@ -58,147 +77,179 @@
 
 1. Uninstall any previous Docker installations.
 2. Enable virtualization on your machine.
+   ![Enable Virtualization](./Assets/02-setup/01-enable-virtualization.png)
 3. Download and install Docker from Docker Hub. - [https://hub.docker.com/]
-4. Enable necessary Windows features for Docker.
-5. Start the Docker
-
-<details>
-
----
-
-<details>
-<summary>Containerization</summary>
-
-## Containerization
-
-- Packaging application code and dependencies into a single unit called a container.
-- Executing application as a container is called containerization.
-- Container is an Virtual machine (linux VM) -> this is separate machine
-- Every container is a separate Linux System.
-- Every container contains source code, libraries and dependencies.
-
-### Process of Containerization
-
-1. Source code
-2. pom.xml -> libraries information -> mavel downloads libraries
-3. Dockerfile -> Dependencies information -> what softwares are required for run our application
+   ![Install Docker](./Assets/02-setup/02-docker-install.png)
+4. Check Docker Version
+   ![Check Docker Version](./Assets/02-setup/03-check-docker-version.png)
+5. Enable necessary Windows features for Docker.
+   ![Turn on Windows Features](./Assets/02-setup/04-turn-windows-features.png)
+6. Start the Docker
+   ![Start the Docker](./Assets/02-setup/05-start-docker.png)
 
 </details>
 
 ---
 
 <details>
-<summary>Create Docker Process</summary>
+<summary>Docker Build Process</summary>
 
-## Create Docker Process
+## Docker Build Process
 
-- Dockerfile -> It contains instructions to create Docker Image.
-- Docker Image -> It contains code, libraries and dependencies.
-- Docker hub -> A repository to store and share Docker images.
+1. Dockerfile -> It contains instructions to create Docker Image.
+2. Docker Image -> It contains code, libraries and dependencies.
+3. Docker hub -> A repository to store and share Docker images.
 
-### docker image
+### Basics
 
-1. compile
-2. package (jar/war)
-3. build docker image
+- Images: Blueprints for creating containers.
+- Containers: Running instances of images.
+- Volumes: Storage areas for saving data used by containers.
 
 </details>
 
 ---
 
 <details>
-<summary>Basics</summary>
+<summary>Docker Commands</summary>
 
-## Basics
+## Docker Commands
 
-- Images
-- Containers
-- Volumes
-</details>
+Initially start the Docker then run the docker commands.
 
----
+### 1. Check available docker images in Local
 
-<details>
-<summary>docker commands</summary>
-
-## docker commands
-
-- initially start the Docker then run the docker commands.
-
-### docker images
-
+- `docker images`
 - It is used to check all the available docker images.
 - image is a package which contains (code + dependencies)
-- `docker images` - to display available docker images
 
-### docker hub
+### 2. download docker image from Docker-Hub
 
-- you can call docker hub is the docker registry.
-- It is used to check all the available docker images.
-- you can check your own images and public images.
-- docker image contains (code + dependencies)
-  - `docker pull <image_name>` or `docker image pull <image_name>` - download docker image
-  - Ex : `docker pull hello-world` it downloads from docker hub
+- `docker pull <image_name>` or `docker image pull <image_name>`
+- It is used to download docker image from docker-hub (docker registry).
+- In the docker-hub, you can check your own images and public images.
+  - Ex : `docker pull hello-world`
+  - ![docker image](./Assets/03-docker-commands/01-docker-image.png)
 
-### docker run
+### create container
 
-- creating docker container
-- `docker run <image_name>` or `docker run <image_id>` - create container with default container name
-- Ex : `docker run hello-world`
-- `docker run --name my-hello-world-one <image_name>` - create container with container name
-- Ex : `docker run --name my-hello-world-one hello-world`
+- `docker create <image_name>` or `docker create <image_id>`
+- It is used to create docker container with random name
+- Ex : `docker create hello-world`
 
-### port mapping
-
-- `docker run -p <host_port>:<container_port> <image_name>` - run the application
-- EX : `docker run -p 8080:8080 hello-world`
-
-### delete the docker image
-
-- first delete container then delete the image
-- `docker rm <container_name>` or `docker rm <container_id>` - delete the container
-- Ex : `docker rm my-hello-world-one`
-- `docker rmi <image_name>` or `docker rmi <image_id>` - delete the docker image
-- Ex : `docker rmi hello-world`
-
-### detached mode
-
-- After creating the container my terminal should be available to execute the further commands.
-- If you want to run the container in the background instead, you can use the --detach (or -d ) flag. This starts the container without occupying your terminal.
-- we can use terminal for other commands.
-- `docker run -d -p 8080:8080 <image_name>` - run the application in detached mode
-- Ex : `docker run --name my-hello-world-one -d -p 8081:8081 hello-world`
+- `docker create --name <container_name> <image_name>`
+- It is used to create docker container with given container name
+- Ex : `docker create --name my-hello-world-one hello-world`
+- ![Create container](./Assets/03-docker-commands/02-create-container.png)
 
 ### display containers
 
 - `docker ps` - to display all the running containers
 - `docker ps -a` - to display running and stopped containers
-
-### stop the container
-
-- `docker stop <container_name>` or `docker stop <container_id>` - to stop the running container
-- Ex : `docker stop my-hello-world-one`
+- ![display containers](./Assets/03-docker-commands/03-display-container.png)
 
 ### start the container
 
-- `docker start <container_name>` or `docker start <container_id>` - to start the stopped container
+- `docker start <container_name>` or `docker start <container_id>` - It is used to start the docker container.
 - Ex : `docker start my-hello-world-one`
+- ![start container](./Assets/03-docker-commands/04-start-container.png)
 
-### system prune
+### Create & run the Container
 
-- `docker system prune -a` - to delete un-used images + stopped containers
+- `run` is used to create and run the container at a time.
+- `docker run <image_name>` or `docker run <image_id>`
+- It is used to create docker container with random name
+- Ex : `docker run hello-world`
 
-### docker logs
+- `docker run --name <container_name> <image_name>`
+- It is used to create docker container with given container name
+- Ex : `docker run --name my-hello-world-one hello-world`
+- ![Start & Run the Container](./Assets/03-docker-commands/05-create-start-container.png)
 
-- `docker logs <container_id` - to see container logs
+### Run the Container in detached mode
+
+- After creating the container my terminal should be available to execute the further commands (container without occupying your terminal), you can use the --detach (or -d ) flag.
+- `docker run -d <image_name>`
+- It is used to run application in detached mode.
+- Ex : `docker run --name my-hello-world-one -d hello-world`
+
+### container logs
+
+- `docker logs <container_name>`
+- It is used to see container logs
+
+### stop the container
+
+- `docker stop <container_name>` or `docker stop <container_id>`
+- It is used to stop the running container.
+- Ex : `docker stop my-hello-world-one`
+
+### delete the container
+
+- `docker rm <container_name>` or `docker rm <container_id>`
+- It is used to delete the container
+- Ex : `docker rm my-hello-world-one`
+
+### delete the docker image
+
+- first delete container then delete the image
+- `docker rmi <image_name>` or `docker rmi <image_id>`
+- It is used to delete the docker image
+- Ex : `docker rmi hello-world`
+
+### delete stopped containers and un-used images
+
+- `docker system prune -a`
+- It is used to delete un-used images + stopped containers
+
+### port mapping
+
+- Makes applications inside containers accessible from your host machine.
+- `docker run -p <host_port>:<container_port> <image_name>`
+- EX : `docker run -p 8080:8080 hello-world`
+- ![Port Mapping](./Assets/03-docker-commands/06-port-mapping.png)
 
 ### docker command
 
 - `docker run -d -p 9090:9090 --name my-container-one hello-world`
 
-* -d represents detached mode
-* -p represents port mapping
-* --name represents name of the container
+* `-d` represents detached mode
+* `-p` represents port mapping
+* `--name` represents name of the container
+
+</details>
+
+---
+
+<details>
+<summary>Docker Build Process</summary>
+
+## Docker Build Process
+
+![Docker Build Process](./Assets/04-docker-build-process/01-docker-build-process.png)
+
+</details>
+
+---
+
+<details>
+<summary>yaml</summary>
+
+## yaml
+
+- **yaml** stands for **Ain't Markup Language**
+- YAML is a human-readable data serialization language that is often used for writing configuration files.
+- Depending on whom you ask, YAML stands for yet another markup language or YAML ain't markup language.
+
+### yaml docs
+
+https://docs.ansible.com/ansible/latest/playbook_guide/playbooks.html#working-with-playbooks
+
+### Write yaml file
+
+- fileName.yaml
+- yaml uses Indentation
+- with indentation we can create object (`key:value`)
 
 </details>
 
@@ -211,6 +262,178 @@
 
 - Write Docker Compose file - use yaml
 - Run Docker Compose file `docker-compose -f fileName.yaml up`
+
+# Docker Compose
+
+- It is used to manage multi container based applications.
+- when we are working with microservices based app we will have multiple services. Every service will have its own docker image.
+- To work with docker compose we need to create docker-compose.yaml file.
+
+### Without Docker Compose
+
+- every thing you need to do manually, lot of time consuming.
+- we create and run all containers individually.
+
+```Dockerfile
+docker run -d -p 8080:8080 --name hotels <image_name>
+docker run -d -p 8080:8080 --name flights <image_name>
+docker run -d -p 8080:8080 --name trains <image_name>
+docker run -d -p 8080:8080 --name cabs <image_name>
+```
+
+### Docker Compose
+
+- Docker Compose is used to manage multiple docker containers.
+
+- we can start the multiple containers at a time.
+- we can stop the multiple containers at a time.
+
+* `docker-compose up` - it creates multiple containers at a time
+* `docker-compose down` - it delete multiple containers at a time
+
+- when we are working with microservices based app we will have multiple services. Every service will have its own docker image.
+
+### create docker-compose
+
+- src -> source code of the project
+- pom -> libraries information
+- Dockerfile -> Dependencies
+- docker-compose -> containers information
+
+* First create images
+* `docker-compose up` It will read docker-compose yaml the it creates containers according to docker-compose yaml
+* `docker-compose down` delete the containers
+
+* detached mode - `docker-compose up -d`
+
+</details>
+
+---
+
+<details>
+<summary>Dockerfile</summary>
+
+## Dockerfile
+
+- ![Dockerfile](./Assets/04-docker-build-process/01-docker-build-process.png)
+- ![Dockerfile](./Assets/05-dockerfile/01-dockerfile.png)
+
+- we write some instructions to build Docker image.
+- Dockerfile is used to specify dependencies are required for the application.
+
+* **Dockerfile -> Docker Image -> Docker Registry**
+
+### Steps :
+
+1. Dockerfile
+2. Docker Image
+3. Docker Registry
+4. Docker Container
+
+---
+
+### Dockerfile
+
+- It contains instructions to build image.
+- we will specify application dependencies here.
+- Dockerfile keywords
+  - FROM
+  - MAINTAINER
+  - COPY
+  - RUN
+  - CMD
+  - EXPOSE
+  - WORKDIR
+  - ENTRYPOINT
+
+### Dockerfile keywords
+
+- FROM : Every dockerfile starts with `FROM` keyword.
+  It is used to specify base image required for our application. The software (dependency) is required to run our code.
+  Ex : `FROM : node` , `FROM : mysql`, `FROM : python`
+
+- MAINTAINER : It is used to specify author of Dockerfile.
+  EX : `MAINTAINER <andepraveen>`
+
+- COPY : It is used to copy the files from host machine to container machine.
+  EX : `COPY <src> <des>`
+  EX : `COPY target/app.war /user/app/node/webapp.war`
+
+- RUN : It is used to execute instructions while creating docker image.
+  EX :`RUN git clone <url>`
+  EX :`RUN git clone <url>`
+
+  Note : We can run write multiple RUN instructions in Dockerfile and they will be processed from top to bottom.
+
+- CMD : It is used to execute instructions while creating docker container. Here overriding possible.
+
+EX : `CMD npm install`
+
+Note : If we write multiple CMD instructions docker will process only last CMD instruction.
+
+- ENTRYPOINT : - CMD : It is used to execute instructions while creating docker container. Here, overriding not possible.
+  EX : `ENTRYPOINT npm install`
+
+- EXPOSE : It is used to specify container port number. It is just readability and documentation purpose.
+  EX : `EXPOSE 8080`
+
+- WORKDIR : It is used to specify working directory (path change).
+  Ex : `WORKDIR /user/app`
+
+### 1. Dockerfile
+
+- Docker file is used to build an image
+
+* Naming Convention : Dockerfile
+* Write Dockerfile
+
+```dockerfile
+
+# sample Dockerfile
+FROM node:22-alpine3.19
+MAINTAINER <andepraveen>
+RUN 'echo run msg - 1'
+RUN 'echo run msg - 2'
+CMD 'echo cmd msg - 1'
+CMD 'echo cmd msg - 2'
+```
+
+### 2. Docker Image
+
+- `docker build -t <image_name> . ` -> dot is the current working directory
+- Ex : `docker build -t app1 .`
+- `docker build -t <image_name> -f <file_name>`
+- Ex : `docker build -t app2 -f praveenDockerfile`
+
+### 3. Docker Container
+
+- Run the Container
+- `docker run app1`
+
+### 4. Docker Registry
+
+- Create Docker Image - `docker build -t andepraveen/app1 .`
+- `docker login` - Login into Your Docker hub Account
+- `docker push andepraveen/app1` - it store in the Docker hub
+- use tagnames
+  - `andepraveen/app:v1`
+  - `andepraveen/app:0.0.1`
+  - `andepraveen/app:latest`
+
+</details>
+
+---
+
+<details>
+<summary>Run Docker Application</summary>
+
+## Run Docker Application
+
+1. `git clone <repo>`
+2. `cd <dir_name>`
+3. `docker build -t <docker_image>`
+4. `docker images`
+5. `docker run -d -p 5000:5000 <docker_image>`
 
 </details>
 
