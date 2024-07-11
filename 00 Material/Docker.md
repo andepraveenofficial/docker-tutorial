@@ -9,9 +9,9 @@
 - Setup
 - Docker Build Process
 - Docker Commands
+- Dockerfile
 - yaml
 - Docker Compose
-- Run Docker Application
 
 </details>
 
@@ -105,6 +105,8 @@
 - Images: Blueprints for creating containers.
 - Containers: Running instances of images.
 - Volumes: Storage areas for saving data used by containers.
+
+![Docker Build Process](./Assets/04-docker-build-process/01-docker-build-process.png)
 
 </details>
 
@@ -222,95 +224,6 @@ Initially start the Docker then run the docker commands.
 ---
 
 <details>
-<summary>Docker Build Process</summary>
-
-## Docker Build Process
-
-![Docker Build Process](./Assets/04-docker-build-process/01-docker-build-process.png)
-
-</details>
-
----
-
-<details>
-<summary>yaml</summary>
-
-## yaml
-
-- **yaml** stands for **Ain't Markup Language**
-- YAML is a human-readable data serialization language that is often used for writing configuration files.
-- Depending on whom you ask, YAML stands for yet another markup language or YAML ain't markup language.
-
-### yaml docs
-
-https://docs.ansible.com/ansible/latest/playbook_guide/playbooks.html#working-with-playbooks
-
-### Write yaml file
-
-- fileName.yaml
-- yaml uses Indentation
-- with indentation we can create object (`key:value`)
-
-</details>
-
----
-
-<details>
-<summary>Docker Compose</summary>
-
-## Docker Compose
-
-- Write Docker Compose file - use yaml
-- Run Docker Compose file `docker-compose -f fileName.yaml up`
-
-# Docker Compose
-
-- It is used to manage multi container based applications.
-- when we are working with microservices based app we will have multiple services. Every service will have its own docker image.
-- To work with docker compose we need to create docker-compose.yaml file.
-
-### Without Docker Compose
-
-- every thing you need to do manually, lot of time consuming.
-- we create and run all containers individually.
-
-```Dockerfile
-docker run -d -p 8080:8080 --name hotels <image_name>
-docker run -d -p 8080:8080 --name flights <image_name>
-docker run -d -p 8080:8080 --name trains <image_name>
-docker run -d -p 8080:8080 --name cabs <image_name>
-```
-
-### Docker Compose
-
-- Docker Compose is used to manage multiple docker containers.
-
-- we can start the multiple containers at a time.
-- we can stop the multiple containers at a time.
-
-* `docker-compose up` - it creates multiple containers at a time
-* `docker-compose down` - it delete multiple containers at a time
-
-- when we are working with microservices based app we will have multiple services. Every service will have its own docker image.
-
-### create docker-compose
-
-- src -> source code of the project
-- pom -> libraries information
-- Dockerfile -> Dependencies
-- docker-compose -> containers information
-
-* First create images
-* `docker-compose up` It will read docker-compose yaml the it creates containers according to docker-compose yaml
-* `docker-compose down` delete the containers
-
-* detached mode - `docker-compose up -d`
-
-</details>
-
----
-
-<details>
 <summary>Dockerfile</summary>
 
 ## Dockerfile
@@ -366,10 +279,9 @@ docker run -d -p 8080:8080 --name cabs <image_name>
   Note : We can run write multiple RUN instructions in Dockerfile and they will be processed from top to bottom.
 
 - CMD : It is used to execute instructions while creating docker container. Here overriding possible.
+  EX : `CMD npm install`
 
-EX : `CMD npm install`
-
-Note : If we write multiple CMD instructions docker will process only last CMD instruction.
+- Note : If we write multiple CMD instructions docker will process only last CMD instruction.
 
 - ENTRYPOINT : - CMD : It is used to execute instructions while creating docker container. Here, overriding not possible.
   EX : `ENTRYPOINT npm install`
@@ -401,8 +313,8 @@ CMD 'echo cmd msg - 2'
 ### 2. Docker Image
 
 - `docker build -t <image_name> . ` -> dot is the current working directory
-- Ex : `docker build -t app1 .`
-- `docker build -t <image_name> -f <file_name>`
+- Ex : `docker build -t app1 .` - **-t** means tagName
+- `docker build -t <image_name> -f <file_name>` - if docker file name is other than Dockerfile
 - Ex : `docker build -t app2 -f praveenDockerfile`
 
 ### 3. Docker Container
@@ -420,20 +332,91 @@ CMD 'echo cmd msg - 2'
   - `andepraveen/app:0.0.1`
   - `andepraveen/app:latest`
 
+### Run Docker Application
+
+1. `git clone <repo>`
+2. `cd <dir_name>`
+3. `docker build -t <docker_image>`
+4. `docker images` - check docker image
+5. `docker run -d -p 5000:5000 <docker_image>`
+
 </details>
 
 ---
 
 <details>
-<summary>Run Docker Application</summary>
+<summary>yaml</summary>
 
-## Run Docker Application
+## yaml
 
-1. `git clone <repo>`
-2. `cd <dir_name>`
-3. `docker build -t <docker_image>`
-4. `docker images`
-5. `docker run -d -p 5000:5000 <docker_image>`
+- **yaml** stands for **Ain't Markup Language**
+- YAML is a human-readable data serialization language that is often used for writing configuration files.
+- YAML is a superset of JSON, which means that any valid JSON document is also a valid
+
+### yaml docs
+
+https://docs.ansible.com/ansible/latest/playbook_guide/playbooks.html#working-with-playbooks
+
+### Write yaml file
+
+- fileName.yaml
+- yaml uses Indentation
+- with indentation we can create object (`key:value`)
+
+</details>
+
+---
+
+<details>
+<summary>Docker Compose</summary>
+
+## Docker Compose
+
+- It is used to manage multi container based applications.
+- when we are working with microservices based app we will have multiple services. Every service will have its own docker image.
+- To work with docker compose we need to create docker-compose.yaml file.
+
+### write docker-compose
+
+- Write Docker Compose file - use yaml
+- Run Docker Compose file `docker-compose -f fileName.yaml up`
+
+### Without Docker Compose
+
+- every thing you need to do manually, lot of time consuming.
+- we create and run all containers individually.
+
+```Dockerfile
+docker run -d -p 8080:8080 --name hotels <image_name>
+docker run -d -p 8080:8080 --name flights <image_name>
+docker run -d -p 8080:8080 --name trains <image_name>
+docker run -d -p 8080:8080 --name cabs <image_name>
+```
+
+### Docker Compose
+
+- Docker Compose is used to manage multiple docker containers.
+
+- we can start the multiple containers at a time.
+- we can stop the multiple containers at a time.
+
+* `docker-compose up` - it creates multiple containers at a time
+* `docker-compose down` - it delete multiple containers at a time
+
+- when we are working with microservices based app we will have multiple services. Every service will have its own docker image.
+
+### create docker-compose
+
+- src -> source code of the project
+- pom -> libraries information
+- Dockerfile -> Dependencies
+- docker-compose -> containers information
+
+* First create images
+* `docker-compose up` It will read docker-compose yaml then it creates containers according to **docker-compose.yaml**
+* `docker-compose down` delete the containers
+
+* detached mode - `docker-compose up -d`
 
 </details>
 
