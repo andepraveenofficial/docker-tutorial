@@ -412,11 +412,12 @@ docker run -d -p 8080:8080 --name cabs <image_name>
 - Dockerfile -> Dependencies
 - docker-compose -> containers information
 
-* First create images
-* `docker-compose up` It will read docker-compose yaml then it creates containers according to **docker-compose.yaml**
-* `docker-compose down` delete the containers
+* `docker-compose build` These are created the images
+* `docker-compose up` It will read docker-compose yaml then it creates containers according to 'docker-compose.yaml'
+* `docker-compose up -d` creates containers in the detached mode
+* `docker-compose down` stops and removes all containers defined in your docker-compose.yml.
 
-* detached mode - `docker-compose up -d`
+* `docker-compose down && docker-compose build && docker-compose up -d` - run all the commands
 
 </details>
 
