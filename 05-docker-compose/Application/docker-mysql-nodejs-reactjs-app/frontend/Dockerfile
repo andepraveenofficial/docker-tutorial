@@ -20,4 +20,4 @@ RUN npm run build
 EXPOSE 3001
 
 # Start a simple web server to serve the built React.js files
-CMD [ "npx", "serve", "-s", "build" ]
+CMD [ "npm", "start" ]
