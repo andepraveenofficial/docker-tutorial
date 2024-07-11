@@ -1,0 +1,19 @@
+### 00 Test
+GET http://localhost:3000/
+
+### 01 Database Initialization
+POST http://localhost:3000/dbinit
+
+### 02 Table Intialization
+POST http://localhost:3000/tbinit
+
+### 03 Add User
+POST http://localhost:3000/user
+Content-Type: application/json
+
+{ 
+    "data": "Praveen"
+}
+
+### 03 Get Users
+GET http://localhost:3000/user
