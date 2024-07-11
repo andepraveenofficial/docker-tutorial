@@ -421,3 +421,16 @@ docker run -d -p 8080:8080 --name cabs <image_name>
 </details>
 
 ---
+
+<details>
+<summary>Docker Debugging</summary>
+
+## Docker Debugging
+
+### Open docker Container shell
+
+- `docker ps` - show running containers
+- `docker exec -it <container_name_or_id> /bin/bash`
+</details>
+
+---
