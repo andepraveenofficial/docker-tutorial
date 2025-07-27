@@ -107,3 +107,8 @@
 * `-d` represents detached mode
 * `-p` represents port mapping
 * `--name` represents name of the container
+
+## Docker Debugging
+
+- `docker ps` - show running containers
+- `docker exec -it <container_name_or_id> /bin/bash`

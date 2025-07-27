@@ -32,7 +32,7 @@
 ### 2. MAINTAINER
 
 - The `MAINTAINER` instruction is used to specify the maintainer of the Dockerfile.
-- Ex : `MAINTAINER <name>`
+- Ex : `LABEL MAINTAINER <name>`
 
 ### 3. COPY
 
@@ -43,7 +43,7 @@
 ### 4. RUN
 
 - The `RUN` instruction is used to execute commands in the container during the image build process.
-- EX :`RUN git clone <url>`
+- EX :`RUN npm install`
 - Note : We can run write multiple RUN instructions in Dockerfile.
 
 ### 5. CMD
@@ -71,10 +71,37 @@
 ### Example Dockerfile
 
 ```Dockerfile
-FROM node:22-alpine3.19
-MAINTAINER <andepraveen>
-RUN 'echo run msg - 1'
-RUN 'echo run msg - 2'
-CMD 'echo cmd msg - 1'
-CMD 'echo cmd msg - 2'
+FROM node:alpine:3.21
+LABEL MAINTAINER="Ande Praveen"
+COPY . .
+RUN npm install
+CMD ["npm", "start"]
+EXPOSE 5000
 ```
+
+### Build and Run Dockerfile
+
+- `docker build -t <tag_name> .`
+
+- `.` indicates the current directory where the Dockerfile is located.
+- `t` flag is a tag name.
+
+```bash
+# Build the Docker image
+docker build -t app1 .
+```
+
+- if docker file name is other than Dockerfile
+- Ex : `docker build -t app2 -f praveenDockerfile`
+
+- run Docker Image : `docker run -d -p 5000:5000 --name <custom_container_name> <docker_image_id>`
+
+### Docker Registry
+
+- Create Docker Image - `docker build -t andepraveen/app1 .`
+- `docker login` - Login into Your Docker hub Account
+- `docker push andepraveen/app1` - it store in the Docker hub
+- use tagnames
+  - `andepraveen/app:v1`
+  - `andepraveen/app:0.0.1`
+  - `andepraveen/app:latest`

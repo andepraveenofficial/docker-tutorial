@@ -1,0 +1,28 @@
+{
+  "name": "MyNewProject",
+  "version": "1.0.0",
+  "description": "I am creating basic setup for my new project",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node ./dist/src/index.js",
+    "dev": "nodemon --exec ts-node ./src/index.ts"
+  },
+  "keywords": [
+    "nodejs",
+    "typescript",
+    "express"
+  ],
+  "author": "Ande Praveen",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.3",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

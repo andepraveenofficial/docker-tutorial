@@ -1,0 +1,9 @@
+FROM node:alpine
+LABEL MAINTAINER="Ande Praveen"
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+EXPOSE 5000
+CMD ["npm", "start"]

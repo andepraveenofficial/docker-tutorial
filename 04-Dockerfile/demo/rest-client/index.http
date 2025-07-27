@@ -1,0 +1,10 @@
+@baseUrl=http://localhost:5000
+
+### 01 Home
+GET {{baseUrl}}
+
+### 02 Health
+GET {{baseUrl}}/health
+
+### 03 All Products
+GET {{baseUrl}}/products
