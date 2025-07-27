@@ -8,6 +8,8 @@
 - Introduction
 - Terminology
 - Docker Installation
+- Docker Build Process
+- Docker
 - Documentation
 
 </details>
@@ -82,6 +84,41 @@ Running one operating system inside another operating system is called Virtualiz
    ![Turn on Windows Features](./assets/02-setup/04-turn-windows-features.png)
 6. Start the Docker
    ![Start the Docker](./assets/02-setup/05-start-docker.png)
+7. Set Google & Cloudflare DNS for Wi-Fi
+
+- Open PowerShell as Administrator, then run:
+
+```powershell
+netsh interface ipv4 set dns name="Wi-Fi" static 8.8.8.8
+netsh interface ipv4 add dns name="Wi-Fi" 1.1.1.1 index=2
+```
+
+</details>
+
+---
+
+<details>
+<summary>Docker Build Process</summary>
+
+## Docker Build Process
+
+1. Dockerfile -> It contains instructions to create Docker Image.
+2. Docker Image -> It is a bundled package of your application that includes the code, libraries, and all necessary tools it needs to run, so it works the same on any computer.
+3. Docker hub -> An online storage (like GitHub, but for images) where you can upload, download, and share Docker images.
+   ![Docker Build Process](./assets/03-docker/01-docker-build-process.png)
+
+</details>
+
+---
+
+<details>
+<summary>Docker</summary>
+
+## Docker
+
+1. Images: Blueprints or templates used to create containers.
+2. Containers: Running instances of images — they are isolated environments that execute your application.
+3. Volumes: Persistent storage areas used by containers to store data, even after the container stops.
 
 </details>
 
